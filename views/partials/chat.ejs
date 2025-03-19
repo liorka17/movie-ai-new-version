@@ -1,0 +1,23 @@
+<!-- ✅ כפתור הצ'אט החדש (רובוט חמוד) -->
+<div class="chat-bot-button" onclick="toggleChat()">
+    <img src="/assets/icons/robot-icon.png" alt="Chat with Jimmy">
+</div>
+
+<!-- ✅ חלון הצ'אט -->
+<div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        🤖 ג'ימי - המלצות סרטים
+        <button class="close-chat" onclick="toggleChat()">✖</button>
+    </div>
+    <div class="chat-box" id="chat-messages">
+        <div class="bot-message">👋 שלום! אני ג'ימי, הבוט שימצא לך את הסרטים המושלמים! תשאל אותי כל דבר 🎬</div>
+    </div>
+    
+    <!-- ✅ טופס לשליחת הודעה -->
+    <form id="chat-form">
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="שאל אותי על סרטים..." required>
+            <button type="submit" id="chat-send">שלח</button>
+        </div>
+    </form>
+</div>
