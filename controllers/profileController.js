@@ -3,11 +3,6 @@ const axios = require('axios'); // מייבא את axios לשליחת בקשות
 
 exports.getProfile = async (req, res) => {
     console.log("🔹 GET /profile called");
-<<<<<<< HEAD
-=======
-    console.log("🔹 User from JWT:", req.user);
-
->>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
     try {
         if (!req.user || !req.user._id) {
             return res.redirect("/login");
@@ -18,7 +13,6 @@ exports.getProfile = async (req, res) => {
         );
 
         if (!user) {
-<<<<<<< HEAD
             return res.status(404).render("profile", { error: "User not found", user: null, genreMovies: [] });
         }
 
@@ -104,15 +98,6 @@ exports.updateProfile = async (req, res) => {
             error: "Server error",
             user: req.body
         });
-=======
-            return res.status(404).render("profile", { error: "User not found", user: null });
-        }
-
-        res.render("profile", { user });
-    } catch (error) {
-        console.error("❌ Error loading profile:", error);
-        res.status(500).render("profile", { error: "Server error", user: null });
->>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
     }
 };
 
