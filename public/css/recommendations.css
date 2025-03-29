@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .recommendations-container {
     padding: 50px 5%;
     text-align: center;
@@ -52,6 +53,59 @@
 }
 
 /* כפתור "עוד פרטים" */
+=======
+/* 📊 קונטיינר שמחזיק את כל תיבות הסטטיסטיקה */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 200px; 
+}
+
+/* 🔗 קישור שעוטף תיבת סטטיסטיקה */
+.stat-box-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 📦 תיבת סטטיסטיקה אחת */
+.stat-box {
+    width: 250px; /* גודל אחיד */
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff4e50, #fc913a); /* צבע מעבר אדום-כתום */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* 🟡 טקסט בתוך תיבה */
+.stat-box h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-align: center;
+    white-space: nowrap; /* מונע שבירת שורות */
+}
+
+.stat-box p {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px 0;
+}
+
+/* ✨ אפקט מעבר בריחוף */
+.stat-box-link:hover .stat-box {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔴 כפתור "פרטים נוספים" להמלצות */
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
 .btn-recomm-details {
     display: inline-block;
     margin-top: 10px;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* 🔲 רקע ותצוגת עמוד */
 .search-container {
     padding: 50px 5%;
@@ -25,6 +26,28 @@
 #searchInput {
     width: 60%;
     padding: 15px;
+=======
+/* 🔎 כותרת לעמוד החיפוש */
+.search-title {
+    font-size: 2rem;
+    color: #FFD700; /* זהב */
+    text-align: center;
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 15px;
+}
+
+/* 📦 תיבת החיפוש */
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* 🧾 שדה הקלט של החיפוש */
+#searchInput {
+    width: 60%;
+    padding: 12px;
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
     font-size: 1rem;
     border: 2px solid #FFD700;
     border-radius: 25px;
@@ -35,10 +58,15 @@
     transition: 0.3s ease-in-out;
 }
 
+<<<<<<< HEAD
+=======
+/* ✨ אפקט פוקוס */
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
 #searchInput:focus {
     border-color: #ff4500;
     box-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
 }
+<<<<<<< HEAD
 
 /* 🎞️ תצוגת כרטיסי סרטים (כמו בגלריה) */
 .movies-grid {
@@ -88,3 +116,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+=======
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4

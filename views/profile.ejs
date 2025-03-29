@@ -11,16 +11,23 @@
         <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
 
         <% if (user && user.profileImage) { %>
+<<<<<<< HEAD
           <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
         <% } else { %>
           <img src="/images/default-avatar.png" alt="ברירת מחדל" class="profile-image">
         <% } %>
+=======
+            <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
+        <% } %>
+        
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
 
         <div class="profile-info">
           <div class="info-line"><span class="label">שם משתמש:</span> <span class="value"><%= user.username %></span></div>
           <div class="info-line"><span class="label">אימייל:</span> <span class="value"><%= user.email %></span></div>
           <div class="info-line"><span class="label">שם מלא:</span> <span class="value"><%= user.fullName || "לא הוזן" %></span></div>
           <div class="info-line"><span class="label">תאריך לידה:</span> <span class="value"><%= user.birthday ? user.birthday.toISOString().split("T")[0] : "לא הוזן" %></span></div>
+<<<<<<< HEAD
           <div class="info-line"><span class="label">ז'אנר מועדף:</span> 
             <span class="value">
               <% if (user.favoriteGenre) { %>
@@ -32,17 +39,25 @@
               <% } %>
             </span>
           </div>
+=======
+          <div class="info-line"><span class="label">ז'אנר מועדף:</span> <span class="value"><%= user.favoriteGenre || "לא הוזן" %></span></div>
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
           <div class="info-line"><span class="label">טלפון:</span> <span class="value"><%= user.phone || "לא הוזן" %></span></div>
         </div>
 
         <div class="profile-actions">
           <a href="/profile/edit" class="btn-edit">✏️ עריכת פרופיל</a>
           <a href="/user/logout" class="btn-logout">🚪 יציאה</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
           <form id="deleteForm" action="/user/delete" method="post">
             <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
           </form>
         </div>
       </div>
+<<<<<<< HEAD
 
       <% if (genreMovies && genreMovies.length > 0) { %>
         <section class="recommended-section">
@@ -63,6 +78,8 @@
         </section>
       <% } %>
 
+=======
+>>>>>>> 5650f6e46d0c27907a3d01d5377dab9e0f25a5d4
     </main>
 
     <%- include('partials/footer') %>
