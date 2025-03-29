@@ -12,6 +12,8 @@ const profileRoutes = require('./routes/profileRoutes'); // מייבא את הנ
 const User = require('./models/user'); // מייבא את מודל המשתמשים ממסד הנתונים
 const setSocialLinks = require('./middleware/socialLinks'); // ייבוא המידלוור החדש
 const chatRoutes = require('./routes/chatRoutes');//חיבור הניתוב לצ'ט
+const commentRoutes = require('./routes/commentRoutes');
+
 
 const app = express(); // יוצר מופע של אפליקציית אקספרס
 
@@ -68,6 +70,7 @@ app.use('/rating', require('./routes/ratingRoutes')); // נתיב שמטפל ב�
 app.use('/recommendations', require('./routes/recommendationRoutes')); // נתיב שמטפל בקבלת המלצות סרטים מבוססות על הדירוגים של המשתמש
 app.use('/', require('./routes/viewRoutes')); // הנתיב הראשי של היישום, מטפל בעמודי התצוגה (דף הבית, התחברות, הרשמה וכו')
 app.use('/', chatRoutes);//שימוש בניתוב של הצ'ט
+app.use(commentRoutes);
 
 
 

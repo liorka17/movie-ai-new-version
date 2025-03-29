@@ -1,5 +1,7 @@
 const tmdbService = require("../services/tmdbbApiService"); // מייבא את השירות לתקשורת עם TMDB API
 const axios = require('axios'); // מייבא את אקסיוס לביצוע בקשות HTTP
+const Comment = require('../models/Comment');
+
 
 // פונקציה זו טוענת את גלריית הסרטים, שולפת את רשימת הסרטים הפופולריים מה-איי.פי.אי ומעבירה אותם לתצוגה
 exports.getGallery = async (req, res) => {
@@ -19,21 +21,34 @@ exports.getGallery = async (req, res) => {
 
 exports.getMovieDetails = async (req, res) => {
     try {
-        const movieId = req.params.id; // מקבל את מזהה הסרט מהנתיב (URL)
-        const movie = await tmdbService.getMovieById(movieId); // שולף את פרטי הסרט מה-איי.פי.אי
-        const trailer = await tmdbService.getMovieTrailer(movieId); // שולף את הטריילר של הסרט מה-איי.פי.אי
-
-        res.render("movieDetails", {
-            movie, // מעביר את פרטי הסרט לתבנית
-            trailer, // מעביר את הטריילר לתבנית
-            user: req.user, // מעביר את פרטי המשתמש (אם מחובר) לתבנית
-            success: req.query.success || false // ✅ מעביר את success מה-URL לתוך התבנית כדי להציג הודעות למשתמש
-        });
-    } catch (error) { 
-        console.error("❌ Error fetching movie details:", error); // מדפיס הודעת שגיאה במקרה של כישלון
-        res.status(500).send("שגיאה בטעינת פרטי הסרט"); // מחזיר הודעת שגיאה למשתמש במקרה של בעיה בטעינת הסרט
+      const movieId = req.params.id;
+      console.log("🔍 movieId:", movieId);
+  
+      const movie = await tmdbService.getMovieById(movieId);
+      console.log("🎬 movie found:", movie?.title || "לא נמצא");
+  
+      const trailer = await tmdbService.getMovieTrailer(movieId);
+      console.log("🎞️ trailer:", trailer ? "נמצא" : "אין");
+  
+      if (!movie) {
+        return res.status(404).send("הסרט לא נמצא במערכת");
+      }
+  
+      const comments = await Comment.find({ movieId }).sort({ createdAt: -1 }).lean();
+      console.log("💬 comments loaded:", comments.length);
+  
+      res.render("movieDetails", {
+        movie,
+        trailer,
+        user: req.user,
+        success: req.query.success || false,
+        comments
+      });
+    } catch (error) {
+      console.error("❌ Error fetching movie details:", error);
+      res.status(500).send("שגיאה בטעינת פרטי הסרט");
     }
-};
+  };
 
 
 // פונקציה זו מציגה את עמוד החיפוש למשתמש
