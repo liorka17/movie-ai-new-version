@@ -1,22 +1,27 @@
-<!-- ✅ כפתור הצ'אט החדש (רובוט חמוד) -->
-<div class="chat-bot-button" onclick="toggleChat()">
+<div class="chat-toggle" onclick="toggleChat()">
     <img src="/assets/icons/robot-icon.png" alt="Chat with Jimmy">
 </div>
 
-<!-- ✅ חלון הצ'אט -->
 <div class="chat-container" id="chatContainer">
     <div class="chat-header">
-        🤖 ג'ימי - המלצות סרטים
-        <button class="close-chat" onclick="toggleChat()">✖</button>
+        <span>🎬 ג'ימי - המלצות סרטים</span>
+        <button class="chat-close" onclick="toggleChat()">❌</button>
     </div>
+
+    <div class="quick-buttons">
+        <button onclick="sendQuickMessage('תמליץ לי סרט מצחיק')">😂 מצחיק</button>
+        <button onclick="sendQuickMessage('תמליץ לי סרט אימה')">👻 אימה</button>
+        <button onclick="sendQuickMessage('תמליץ לי רומנטי')">💖 רומנטי</button>
+        <button onclick="sendQuickMessage('תמליץ לי סרט אקשן')">💥 אקשן</button>
+    </div>
+
     <div class="chat-box" id="chat-messages">
-        <div class="bot-message">👋 שלום! אני ג'ימי, הבוט שימצא לך את הסרטים המושלמים! תשאל אותי כל דבר 🎬</div>
+        <div class="chat-message bot">👋 שלום! אני ג'ימי, תן לי לעזור לך למצוא סרט מעולה! 🎥</div>
     </div>
-    
-    <!-- ✅ טופס לשליחת הודעה -->
+
     <form id="chat-form">
         <div class="chat-input">
-            <input type="text" id="chat-input" placeholder="שאל אותי על סרטים..." required>
+            <input type="text" id="chat-input" placeholder="שאל אותי על סרטים..." required />
             <button type="submit" id="chat-send">שלח</button>
         </div>
     </form>

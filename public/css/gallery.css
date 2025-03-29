@@ -1,0 +1,96 @@
+.gallery-container {
+    padding: 50px 5%;
+    text-align: center;
+    background: url('/images/cinema-bg.jpg') center/cover no-repeat; /* רקע קולנועי */
+    min-height: 100vh;
+}
+
+/* כותרת ראשית */
+.gallery-container h1 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+/* 🎞️ רשת הסרטים */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* 🎥 כרטיס סרט */
+.movie-card {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
+}
+
+/* תמונת הסרט */
+.movie-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* 🏆 מידע הסרט */
+.movie-info {
+    margin-top: 10px;
+    color: #fff;
+}
+
+/* 🎬 כפתור פרטים נוספים */
+.btn-details {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #B22222;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-details:hover {
+    background: #8B0000;
+    box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+}
+
+/* 🎟️ עמודי גלילה */
+.pagination {
+    margin-top: 30px;
+}
+
+.page-btn {
+    background: #0056b3;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.page-btn:hover {
+    background: #003d82;
+    box-shadow: 0px 4px 10px rgba(0, 86, 179, 0.5);
+}
+
+.page-number {
+    color: #FFD700;
+    font-size: 1.2rem;
+    margin: 0 15px;
+}
+
+

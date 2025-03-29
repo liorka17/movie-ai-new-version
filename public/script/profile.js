@@ -1,12 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     const deleteForm = document.getElementById("deleteForm");
-    
-    if (deleteForm) {
-        deleteForm.addEventListener("submit", (event) => {
-            const confirmation = confirm("⚠️ האם אתה בטוח שברצונך למחוק את חשבונך? פעולה זו בלתי הפיכה!");
-            if (!confirmation) {
-                event.preventDefault(); // מבטל את שליחת הבקשה אם המשתמש ביטל
+
+    if (!deleteForm) return;
+
+    deleteForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'אתה בטוח?',
+            text: "⚠️ פעולה זו תמחק את החשבון שלך לצמיתות!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'כן, מחק אותי!',
+            cancelButtonText: 'ביטול'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteForm.submit();
             }
         });
-    }
+    });
 });

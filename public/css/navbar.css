@@ -1,0 +1,90 @@
+/* 🎬 עיצוב תפריט ניווט - אווירת קולנוע */
+.cinema-navbar {
+    display: flex; /* מסדר את הפריטים בשורה */
+    justify-content: space-between; /* הפריטים יתפרסו עם רווחים שווים */
+    align-items: center; /* יישור פריטים אנכית */
+    flex-wrap: wrap; /* אם אין מקום - ירדו שורה */
+    padding: 10px 20px;
+    background: #b90030;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px; /* רווח בין הכפתורים */
+    flex-wrap: wrap; /* מונע חפיפה - אם אין מקום הם ירדו למטה */
+}
+
+.nav-item {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+}
+
+.logout-btn {
+    background: #ff4444;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+    background: #ff2222;
+}
+
+
+/* סגנון האייקונים של הרשתות החברתיות */
+.social-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* כשהמסך קטן - הם ירדו למטה */
+}
+
+/* עיצוב כל אייקון */
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+
+.social-icons img {
+    width: 100%;
+    height: auto;
+    filter: brightness(1.2);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 50%;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.5);
+}
+
+/* 🔹 פתרון למסכים קטנים 🔹 */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* במקום שורה - יהפוך לעמודה */
+        align-items: center;
+    }
+
+    .nav-links,
+    .social-icons {
+        justify-content: center;
+        width: 100%; /* פריסה מלאה */
+    }
+
+    .social-icons {
+        margin-top: 10px; /* מוסיף רווח כדי למנוע חפיפה */
+    }
+}

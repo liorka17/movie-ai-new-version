@@ -32,3 +32,21 @@ exports.LoginPage = (req, res) => {
     res.render("login"); // מציג את תבנית עמוד ההתחברות
 };
 
+
+exports.RegisterPage = async (req, res) => {
+  try {
+    const response = await axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {
+      params: {
+        api_key: process.env.TMDB_API_KEY,
+        language: 'he'
+      }
+    });
+
+    const genres = response.data.genres || [];
+    res.render("register", { genres }); // 👈 שולח genres ל-EJS
+
+  } catch (err) {
+    console.error("❌ Error loading genres:", err.message);
+    res.render("register", { genres: [] }); // 👈 שולח ריק אם יש שגיאה
+  }
+};

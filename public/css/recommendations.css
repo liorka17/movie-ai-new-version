@@ -1,0 +1,70 @@
+.recommendations-container {
+    padding: 50px 5%;
+    text-align: center;
+    background: url('/images/cinema-bg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+}
+
+/* כותרת */
+.recommendations-container h1 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+/* גריד ההמלצות */
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* כרטיס המלצה */
+.recommendation-card {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.recommendation-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
+}
+
+/* תמונת המלצה (פוסטר של סרט) */
+.recommendation-card img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* טקסט של המלצה */
+.recommendation-info {
+    margin-top: 10px;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* כפתור "עוד פרטים" */
+.btn-recomm-details {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #B22222;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-recomm-details:hover {
+    background: #8B0000;
+    box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+}

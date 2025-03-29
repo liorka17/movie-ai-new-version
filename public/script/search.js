@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="movie-info">
                         <h3>${movie.title}</h3>
                         <p>⭐ דירוג: ${movie.vote_average.toFixed(1)}</p>
-                        <a href="/video/movie/${movie.id}" class="btn">📽️ פרטים נוספים</a>
+                        <a href="/video/movie/${movie.id}" class="btn-details">📽️ פרטים נוספים</a>
                     </div>
                 `;
 

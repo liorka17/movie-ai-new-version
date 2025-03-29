@@ -1,38 +1,74 @@
 <!DOCTYPE html>
-<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
-<%- include('partials/head') %> <!-- חיבור קובץ ה-ההאדר שמכיל את כל הגדרות המטא והסטיילינג -->
+<html lang="he">
+<%- include('partials/head') %>
 
 <body>
-    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+  <%- include('partials/navbar') %>
 
-    <main class="register-container"> <!-- מיכל ראשי לטופס ההרשמה -->
-        <div class="register-box"> <!-- קופסת ההרשמה -->
-            <h2>🎟️ הרשמה למועדון הקולנוע</h2> <!-- כותרת הדף -->
-            <p class="register-subtitle">קבל גישה להמלצות סרטים מותאמות אישית 🍿</p> <!-- תיאור קצר -->
+  <main class="register-container">
+    <div class="register-box">
+      <h2>🎟️ הרשמה למועדון הקולנוע</h2>
+      <p class="register-subtitle">קבל גישה להמלצות סרטים מותאמות אישית 🍿</p>
 
-            <form action="/user/register" method="POST"> <!-- טופס ההרשמה שנשלח לשרת -->
-                <div class="input-group"> <!-- קבוצת קלט עבור שם המשתמש -->
-                    <label for="username">👤 שם משתמש:</label> <!-- תווית שדה שם המשתמש -->
-                    <input type="text" id="username" name="username" required> <!-- שדה קלט לשם המשתמש -->
-                </div>
-
-                <div class="input-group"> <!-- קבוצת קלט עבור כתובת האימייל -->
-                    <label for="email">📧 כתובת אימייל:</label> <!-- תווית שדה האימייל -->
-                    <input type="email" id="email" name="email" required> <!-- שדה קלט לאימייל -->
-                </div>
-
-                <div class="input-group"> <!-- קבוצת קלט עבור הסיסמה -->
-                    <label for="password">🔒 סיסמה:</label> <!-- תווית שדה הסיסמה -->
-                    <input type="password" id="password" name="password" required> <!-- שדה קלט לסיסמה -->
-                </div>
-
-                <button type="submit" class="btn-register">✨ הצטרף עכשיו</button> <!-- כפתור הרשמה -->
-            </form>
-
-            <p class="login-link">כבר רשום? <a href="/login">🎬 התחבר עכשיו</a></p> <!-- קישור לדף ההתחברות -->
+      <form action="/user/register" method="POST" enctype="multipart/form-data" class="register-grid">
+        <div class="input-group">
+          <label for="username">שם משתמש 👤</label>
+          <input type="text" id="username" name="username" required />
         </div>
-    </main>
 
-    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+        <div class="input-group">
+          <label for="email">כתובת אימייל 📧</label>
+          <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+        </div>
+
+        <div class="input-group">
+          <label for="password">סיסמה 🔒</label>
+          <input type="password" id="password" name="password" required minlength="6" />
+        </div>
+
+        <div class="input-group">
+          <label for="fullName">שם מלא 🧑‍💼</label>
+          <input type="text" id="fullName" name="fullName" />
+        </div>
+
+        <div class="input-group">
+          <label for="birthday">תאריך לידה 🎂</label>
+          <input type="date" id="birthday" name="birthday" />
+        </div>
+
+        <div class="input-group">
+          <label for="favoriteGenre">ז'אנר מועדף 🎬</label>
+          <select id="favoriteGenre" name="favoriteGenre" required>
+            <option value="">בחר ז'אנר מועדף</option>
+            <% if (genres && genres.length > 0) { %>
+              <% genres.forEach(genre => { %>
+                <option value="<%= genre.id %>"><%= genre.name %></option>
+              <% }) %>
+            <% } else { %>
+              <option value="">⚠️ לא נמצאו ז'אנרים</option>
+            <% } %>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="phone">מספר טלפון 📱</label>
+          <input type="tel" id="phone" name="phone" pattern="^0[5-9]\d{7,8}$" placeholder="05X-XXXXXXX" />
+        </div>
+
+        <div class="input-group full-width">
+          <label for="profileImage">תמונת פרופיל 📷</label>
+          <input type="file" id="profileImage" name="profileImage" accept="image/*" />
+        </div>
+
+        <div class="full-width">
+          <button type="submit" class="btn-register">✨ הצטרף עכשיו</button>
+        </div>
+      </form>
+
+      <p class="login-link">כבר רשום? <a href="/login">🎬 התחבר עכשיו</a></p>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
 </body>
 </html>

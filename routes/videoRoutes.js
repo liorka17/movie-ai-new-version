@@ -1,7 +1,7 @@
 const express = require("express"); // מייבא את אקספרס לצורך ניתוב
 const router = express.Router(); // יוצר אובייקט ניתוב
 
-const { getGallery, getMovieDetails, searchMovies, SearchPage, getSiteStats } = require('../controllers/videoController'); // מייבא את פונקציות בקרת הווידאו
+const { getGallery, getMovieDetails, searchMovies, SearchPage, getSiteStats,galleryByGenre } = require('../controllers/videoController'); // מייבא את פונקציות בקרת הווידאו
 
 // נתיב לטעינת גלריית הסרטים
 router.get('/gallery', getGallery); 
@@ -17,5 +17,7 @@ router.get('/search/movies', searchMovies);
 
 // נתיב לקבלת סטטיסטיקות כלליות על הסרטים
 router.get("/stats", getSiteStats); 
+
+router.get("/genre/:genreName", galleryByGenre);
 
 module.exports = router; // מייצא את הנתיבים לשימוש בקובצי ניתוב אחרים

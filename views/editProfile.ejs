@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he">
+<%- include('partials/head') %>
+
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="register-container">
+    <div class="register-box">
+      <h2>✏️ עריכת פרופיל</h2>
+      <p class="register-subtitle">עדכן את הפרטים האישיים שלך</p>
+
+      <form action="/profile/edit" method="POST" enctype="multipart/form-data" class="register-grid">
+        <div class="input-group">
+          <label for="username">שם משתמש 👤</label>
+          <input type="text" id="username" name="username" value="<%= user.username %>" required />
+        </div>
+
+        <div class="input-group">
+          <label for="email">כתובת אימייל 📧</label>
+          <input type="email" id="email" name="email" value="<%= user.email %>" required />
+        </div>
+
+        <div class="input-group">
+          <label for="fullName">שם מלא 🧑‍💼</label>
+          <input type="text" id="fullName" name="fullName" value="<%= user.fullName || '' %>" />
+        </div>
+
+        <div class="input-group">
+          <label for="birthday">תאריך לידה 🎂</label>
+          <input type="date" id="birthday" name="birthday" value="<%= user.birthday ? user.birthday.toISOString().split('T')[0] : '' %>" />
+        </div>
+
+        <!-- 🎬 בחירת ז'אנר מועדף -->
+        <div class="input-group">
+          <label for="favoriteGenre">ז'אנר מועדף 🎬</label>
+          <select id="favoriteGenre" name="favoriteGenre">
+            <option value="">בחר ז'אנר מועדף</option>
+            <option value="אקשן" <%= user.favoriteGenre === 'אקשן' ? 'selected' : '' %>>אקשן</option>
+            <option value="קומדיה" <%= user.favoriteGenre === 'קומדיה' ? 'selected' : '' %>>קומדיה</option>
+            <option value="דרמה" <%= user.favoriteGenre === 'דרמה' ? 'selected' : '' %>>דרמה</option>
+            <option value="פנטזיה" <%= user.favoriteGenre === 'פנטזיה' ? 'selected' : '' %>>פנטזיה</option>
+            <option value="מדע בדיוני" <%= user.favoriteGenre === 'מדע בדיוני' ? 'selected' : '' %>>מדע בדיוני</option>
+            <option value="רומנטיקה" <%= user.favoriteGenre === 'רומנטיקה' ? 'selected' : '' %>>רומנטיקה</option>
+            <option value="אנימציה" <%= user.favoriteGenre === 'אנימציה' ? 'selected' : '' %>>אנימציה</option>
+            <option value="מתח" <%= user.favoriteGenre === 'מתח' ? 'selected' : '' %>>מתח</option>
+            <option value="פשע" <%= user.favoriteGenre === 'פשע' ? 'selected' : '' %>>פשע</option>
+            <option value="דוקומנטרי" <%= user.favoriteGenre === 'דוקומנטרי' ? 'selected' : '' %>>דוקומנטרי</option>
+            <option value="משפחה" <%= user.favoriteGenre === 'משפחה' ? 'selected' : '' %>>משפחה</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="phone">מספר טלפון 📱</label>
+          <input type="tel" id="phone" name="phone" pattern="^0[5-9]\d{7,8}$" placeholder="05X-XXXXXXX" value="<%= user.phone || '' %>" />
+        </div>
+
+        <div class="input-group full-width">
+          <label for="profileImage">תמונת פרופיל 📷</label>
+          <input type="file" id="profileImage" name="profileImage" accept="image/*" />
+        </div>
+
+        <div class="input-group full-width">
+          <button type="submit" class="btn-register">💾 שמור שינויים</button>
+        </div>
+      </form>
+
+      <div class="login-link">
+        <a href="/profile">🔙 חזור לפרופיל</a>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

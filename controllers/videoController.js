@@ -115,3 +115,44 @@ exports.getSiteStats = async () => {
 };
 
 
+exports.galleryByGenre = async (req, res) => {
+    try {
+        const { genreName } = req.params;
+
+        // שליפת כל הז'אנרים מה-TMDB
+        const genresRes = await axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {
+            params: {
+                api_key: process.env.TMDB_API_KEY,
+                language: 'he'
+            }
+        });
+
+        const genres = genresRes.data.genres || [];
+        const genre = genres.find(g => g.name === genreName);
+
+        if (!genre) {
+            return res.render("gallery", { movies: [], page: 1, error: "⚠️ הז'אנר לא נמצא" });
+        }
+
+        // שליפת סרטים לפי ז'אנר
+        const moviesRes = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+            params: {
+                api_key: process.env.TMDB_API_KEY,
+                with_genres: genre.id,
+                language: 'he',
+                sort_by: 'popularity.desc'
+            }
+        });
+
+        const movies = moviesRes.data.results || [];
+
+        res.render("gallery", { movies, page: 1 });
+
+    } catch (err) {
+        console.error("❌ Error loading genre gallery:", err.message);
+        res.render("gallery", { movies: [], page: 1, error: "❌ שגיאה בטעינת סרטים מהז'אנר" });
+    }
+};
+
+
+
