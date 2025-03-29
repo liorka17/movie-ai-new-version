@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatMessages = document.getElementById("chat-messages");
     const sendButton = document.getElementById("chat-send");
 
+    // אם אין צ'אט בדף – לא עושים כלום
+    if (!chatContainer || !chatForm || !chatInput || !chatMessages || !sendButton) return;
+
     chatContainer.style.display = "none";
 
     window.toggleChat = function () {

@@ -4,44 +4,52 @@
     align-items: center;
     height: 100vh;
     background: url('/images/cinema-bg.jpg') center/cover no-repeat;
-}
-
-.register-box {
+  }
+  
+  .register-box {
     background: rgba(0, 0, 0, 0.85);
     padding: 30px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
-    max-width: 400px;
-    width: 90%;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    max-width: 700px;
+    width: 95%;
     border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.register-box h2 {
-    font-size: 1.8rem;
+  }
+  
+  .register-box h2 {
+    font-size: 2rem;
     color: #FFD700;
     text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
-}
-
-.register-subtitle {
+    margin-bottom: 10px;
+  }
+  
+  .register-subtitle {
     color: #ddd;
     font-size: 1rem;
-    margin-bottom: 15px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+  
+  /* ✅ גריד טופס */
+  .register-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px;
+    direction: rtl;
+    text-align: right;
+  }
+  
+  .input-group label {
+    font-size: 1rem;
+    color: #FFD700;
+    font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #FFD700;
-}
-
-.input-group input {
+  }
+  
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
     width: 100%;
     padding: 10px;
     font-size: 1rem;
@@ -50,15 +58,25 @@
     background: #222;
     color: white;
     transition: all 0.3s ease;
-}
-
-.input-group input:focus {
+  }
+  
+  .input-group input:focus {
     background: black;
     border-color: #ffcc00;
     box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
-}
-
-.btn-register {
+  }
+  
+  .input-group textarea {
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .btn-register {
     background: linear-gradient(90deg, #b71c1c, #8e0000);
     color: white;
     border: none;
@@ -68,25 +86,25 @@
     cursor: pointer;
     width: 100%;
     transition: all 0.3s ease-in-out;
-    margin-top: 10px;
-}
-
-.btn-register:hover {
+  }
+  
+  .btn-register:hover {
     background: linear-gradient(90deg, #8e0000, #5a0000);
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
-}
-
-.login-link {
-    margin-top: 15px;
+  }
+  
+  .login-link {
+    margin-top: 20px;
     font-size: 1rem;
-}
-
-.login-link a {
+  }
+  
+  .login-link a {
     color: #FFD700;
     font-weight: bold;
     text-decoration: none;
-}
-
-.login-link a:hover {
+  }
+  
+  .login-link a:hover {
     text-decoration: underline;
-}
+  }
+  

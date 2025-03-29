@@ -1,33 +1,82 @@
 <!DOCTYPE html>
-<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
-<%- include('partials/head') %> <!-- חיבור קובץ ה-HEAD שמכיל את כל הגדרות המטא והסטיילינג -->
+<html lang="he">
+<%- include('partials/head') %>
 
 <body>
-    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+    <%- include('partials/navbar') %>
 
-    <main class="recommendation-container"> <!-- מיכל ראשי לעמוד ההמלצות -->
-        <h1>🎬 המלצות מותאמות עבורך</h1> <!-- כותרת הדף -->
+    <main class="register-container">
+        <div class="register-box">
+            <h2>🎟️ הרשמה למועדון הקולנוע</h2>
+            <p class="register-subtitle">קבל גישה להמלצות סרטים מותאמות אישית 🍿</p>
 
-        <% if (message) { %> <!-- אם יש הודעה (למשל "לא נמצאו המלצות"), הצג אותה -->
-            <p class="info-message"><%= message %></p>
-        <% } %>
-
-        <div class="movies-grid"> <!-- מיכל שמציג את הסרטים ברשת -->
-            <% recommendations.forEach(movie => { %> <!-- לולאה העוברת על כל רשימת ההמלצות -->
-                <div class="movie-card"> <!-- כרטיס סרט -->
-                    <div class="movie-image"> <!-- תצוגת תמונת הסרט -->
-                        <img src="<%= movie.poster %>" alt="<%= movie.title %>">
-                    </div>
-                    <div class="movie-info"> <!-- מידע על הסרט -->
-                        <h3><%= movie.title %></h3> <!-- שם הסרט -->
-                        <p><%= movie.overview %></p> <!-- תקציר הסרט -->
-                        <a href="/video/movie/<%= movie.id %>" class="btn-recomm-details">📽️ פרטים נוספים</a> <!-- קישור לעמוד הסרט -->
-                    </div>
+            <form action="/user/register" method="POST">
+                <!-- שם משתמש -->
+                <div class="input-group">
+                    <label for="username">👤 שם משתמש:</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
-            <% }) %> <!-- סוף הלולאה -->
+
+                <!-- אימייל -->
+                <div class="input-group">
+                    <label for="email">📧 כתובת אימייל:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- סיסמה -->
+                <div class="input-group">
+                    <label for="password">🔒 סיסמה:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <!-- שם פרטי -->
+                <div class="input-group">
+                    <label for="firstName">🧑 שם פרטי:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+
+                <!-- שם משפחה -->
+                <div class="input-group">
+                    <label for="lastName">👪 שם משפחה:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+
+                <!-- תאריך לידה -->
+                <div class="input-group">
+                    <label for="birthDate">🎂 תאריך לידה:</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+
+                <!-- מגדר -->
+                <div class="input-group">
+                    <label for="gender">🚻 מגדר:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">בחר מגדר</option>
+                        <option value="זכר">זכר</option>
+                        <option value="נקבה">נקבה</option>
+                        <option value="אחר">אחר</option>
+                    </select>
+                </div>
+
+                <!-- עיר -->
+                <div class="input-group">
+                    <label for="city">🏙️ עיר מגורים:</label>
+                    <input type="text" id="city" name="city">
+                </div>
+
+                <!-- תחומי עניין -->
+                <div class="input-group">
+                    <label for="interests">🎯 תחומי עניין (מופרדים בפסיקים):</label>
+                    <input type="text" id="interests" name="interests" placeholder="אקשן, קומדיה, דרמה...">
+                </div>
+
+                <button type="submit" class="btn-register">✨ הצטרף עכשיו</button>
+            </form>
+
+            <p class="login-link">כבר רשום? <a href="/login">🎬 התחבר עכשיו</a></p>
         </div>
     </main>
 
-    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+    <%- include('partials/footer') %>
 </body>
 </html>

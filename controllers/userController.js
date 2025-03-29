@@ -8,52 +8,72 @@ const sendWelcomeEmail = require("../services/sendEmail"); // מייבא את ה
 
 exports.register = async (req, res) => {
     try {
-        const { username, email, password } = req.body; // קולט את הנתונים שנשלחו מהטופס
+        const { username, email, password, fullName, birthday, favoriteGenre, phone } = req.body;
 
-        let user = await User.findOne({ email }); // מחפש אם המשתמש כבר קיים במסד הנתונים
-        if (user) { // אם המשתמש כבר רשום
-            return res.status(400).render("register", { error: "User already exists", user: null }); // מציג הודעת שגיאה
+        // בדיקה אם המשתמש כבר קיים
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).render("register", { error: "User already exists", user: null });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10); // מצפין את הסיסמה עם רמת הצפנה 10
+        // הצפנת הסיסמה
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        user = new User({ username, email, password: hashedPassword }); // יוצר אובייקט משתמש חדש ושומר את הנתונים
-        await user.save(); // שומר את המשתמש במסד הנתונים
+        // 🔄 קבלת URL של התמונה מ-Cloudinary
+        let profileImageUrl = null;
+        if (req.file && req.file.path) {
+            profileImageUrl = req.file.path; // 🌩️ קישור ישיר מהענן
+        }
 
-        const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" }); // יוצר JWT עם תוקף של שעה
-        user.token = token; // משייך את ה-Token למשתמש
-        await user.save(); // שומר את העדכון במסד הנתונים
-        res.cookie("token", token, { httpOnly: true }); // שומר את ה-Token כ-Cookie כדי לאבטח את ההתחברות
+        // יצירת משתמש חדש
+        user = new User({
+            username,
+            email,
+            password: hashedPassword,
+            fullName,
+            birthday,
+            favoriteGenre,
+            phone,
+            profileImage: profileImageUrl // 🖼️ שומר את הקישור מהענן
+        });
 
-        console.log("✅ User registered and authenticated:", user); // מדפיס ללוג שהרישום הצליח
+        await user.save();
 
-        // 🔹 שליחת אימייל "ברוך הבא" עם עיצוב בעברית
+        // יצירת טוקן
+        const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        user.token = token;
+        await user.save();
+
+        // שמירת הטוקן בקוקי
+        res.cookie("token", token, { httpOnly: true });
+
+        // מייל ברוך הבא
         await sendWelcomeEmail(user.email, user.username);
 
-        // 🔹 בדיקה אם הבקשה מגיעה מ-Postman
-        const userAgent = req.get("User-Agent"); // מקבל את סוג ה-User-Agent (דפדפן/תוכנה אחרת)
-        const isPostman = userAgent && userAgent.includes("PostmanRuntime"); // בודק אם הבקשה מגיעה מפוסטמן
+        // בדיקה אם זה Postman
+        const userAgent = req.get("User-Agent");
+        const isPostman = userAgent && userAgent.includes("PostmanRuntime");
 
-        if (isPostman) { // אם הבקשה היא מפוסטמן
-            return res.status(201).json({ message: `user name ${username} and mail ${email}`, token }); // מחזיר JSON עם הודעה ו-Token
+        if (isPostman) {
+            return res.status(201).json({ message: `user name ${username} and mail ${email}`, token });
         }
 
-        res.redirect("/"); // אם לא מדובר בפוסטמן, מפנה את המשתמש לדף הבית
+        res.redirect("/");
 
-    } catch (error) { 
+    } catch (error) {
         console.error("❌ Error in register:", error);
 
-        // 🔹 במקרה של שגיאה, מחזיר ג'ייסון אם הבקשה מגיעה מפוסטמן
-        const userAgent = req.get("User-Agent"); 
+        const userAgent = req.get("User-Agent");
         const isPostman = userAgent && userAgent.includes("PostmanRuntime");
 
         if (isPostman) {
             return res.status(500).json({ error: "Server error" });
         }
 
-        res.status(500).render("register", { error: "Server error", user: null }); // אם לא מדובר בפוסטמן, מציג שגיאה בדף ההרשמה
+        res.status(500).render("register", { error: "Server error", user: null });
     }
 };
+
 
 
 
