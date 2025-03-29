@@ -10,9 +10,10 @@
         <h2>👤 הפרופיל שלי</h2>
         <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
 
-        <% if (user.profileImage) { %>
-          <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
+        <% if (user && user.profileImage) { %>
+            <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
         <% } %>
+        
 
         <div class="profile-info">
           <div class="info-line"><span class="label">שם משתמש:</span> <span class="value"><%= user.username %></span></div>

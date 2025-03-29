@@ -1,8 +1,17 @@
-const express = require("express"); // מייבא את express לצורך ניתוב
-const router = express.Router(); // יוצר אובייקט ניתוב
-const{getProfile}=require("../controllers/profileController");
-const authMiddleware = require("../middleware/authMiddleware");
-// נתיב זה מטפל בבקשות לעמוד הפרופיל של המשתמש (`/profile`).
-router.get("/", getProfile); // מפנה את הבקשה לפונקציה המטפלת בפרופיל המשתמש
+const express = require("express");
+const router = express.Router();
 
-module.exports = router; // מייצא את הנתיב לשימוש בקובצי ניתוב אחרים
+const { getProfile, editProfileForm, updateProfile } = require("../controllers/profileController");
+const authMiddleware = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware"); // ✅ זה מוודא שגם קבצים ייטופלו
+
+// צפייה בפרופיל
+router.get("/", authMiddleware, getProfile);
+
+// דף עריכת פרופיל
+router.get("/edit", authMiddleware, editProfileForm);
+
+// שליחת טופס עריכת פרופיל
+router.post("/edit", authMiddleware, upload.single("profileImage"), updateProfile);
+
+module.exports = router;
