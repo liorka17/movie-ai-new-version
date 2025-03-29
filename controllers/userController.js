@@ -11,22 +11,23 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password, fullName, birthday, favoriteGenre, phone } = req.body;
 
-        // בדיקה אם המשתמש כבר קיים
         let user = await User.findOne({ email });
         if (user) {
             return res.status(400).render("register", { error: "User already exists", user: null });
         }
 
-        // הצפנת הסיסמה
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // 🔄 קבלת URL של התמונה מ-Cloudinary
+        // ✅ קישור אמיתי מהענן
         let profileImageUrl = null;
-        if (req.file && req.file.path) {
-            profileImageUrl = req.file.path; // 🌩️ קישור ישיר מהענן
+        if (req.file && req.file.path && req.file.filename && req.file.destination !== undefined) {
+            if (req.file.cloudinary && req.file.cloudinary.secure_url) {
+                profileImageUrl = req.file.cloudinary.secure_url;
+            } else if (req.file.path.startsWith("http")) {
+                profileImageUrl = req.file.path; // אם הוא כבר קישור תקף
+            }
         }
 
-        // יצירת משתמש חדש
         user = new User({
             username,
             email,
@@ -35,27 +36,21 @@ exports.register = async (req, res) => {
             birthday,
             favoriteGenre,
             phone,
-            profileImage: profileImageUrl // 🖼️ שומר את הקישור מהענן
+            profileImage: profileImageUrl
         });
 
         await user.save();
 
-        // יצירת טוקן
         const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" });
         user.token = token;
         await user.save();
 
-        // שמירת הטוקן בקוקי
         res.cookie("token", token, { httpOnly: true });
 
-        // מייל ברוך הבא
         await sendWelcomeEmail(user.email, user.username);
 
-        // בדיקה אם זה Postman
         const userAgent = req.get("User-Agent");
-        const isPostman = userAgent && userAgent.includes("PostmanRuntime");
-
-        if (isPostman) {
+        if (userAgent && userAgent.includes("PostmanRuntime")) {
             return res.status(201).json({ message: `user name ${username} and mail ${email}`, token });
         }
 
@@ -63,17 +58,15 @@ exports.register = async (req, res) => {
 
     } catch (error) {
         console.error("❌ Error in register:", error);
-
         const userAgent = req.get("User-Agent");
-        const isPostman = userAgent && userAgent.includes("PostmanRuntime");
-
-        if (isPostman) {
+        if (userAgent && userAgent.includes("PostmanRuntime")) {
             return res.status(500).json({ error: "Server error" });
         }
-
         res.status(500).render("register", { error: "Server error", user: null });
     }
 };
+
+
 
   
 // פונקציה זו מטפלת בתהליך ההתחברות של המשתמש. היא בודקת אם כתובת האימייל והסיסמה תקינים

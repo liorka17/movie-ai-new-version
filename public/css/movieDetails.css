@@ -1,141 +1,117 @@
+body {
+    font-family: 'Secular One', sans-serif;
+}
+
 .movie-details-container {
     padding: 50px 5%;
-    text-align: center;
-    background: url('/images/cinema-bg.jpg') center/cover no-repeat; /* רקע קולנועי */
+    background: url('/images/cinema-bg.jpg') center/cover no-repeat;
     min-height: 100vh;
+    color: #fff;
+    direction: rtl;
+    text-align: center;
 }
 
-/* כותרת הסרט */
 .movie-details-container h2 {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     color: #FFD700;
-    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
+    text-shadow: 2px 2px 12px rgba(255, 215, 0, 0.8);
     margin-bottom: 20px;
-}
-
-/* 🎥 תוכן הסרט */
-.movie-details-container .movie-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 15px;
+}
+
+.movie-content {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
     flex-wrap: wrap;
-    gap: 30px;
+    margin-top: 40px;
 }
 
-/* תמונת הסרט */
-.movie-details-container .movie-image img {
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+.movie-image img {
+    width: 230px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.25);
 }
 
-/* 📝 מידע הסרט */
-.movie-details-container .movie-info {
-    color: #fff;
-    max-width: 600px;
+.movie-info {
+    max-width: 620px;
     text-align: right;
 }
 
-/* תקציר הסרט */
-.movie-details-container .movie-overview {
-    font-size: 1.2rem;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 15px;
-    border-radius: 8px;
+.movie-overview {
+    font-size: 1.35rem;
+    line-height: 2;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.15);
 }
 
-/* 🎞️ טריילר הסרט */
-.movie-details-container .movie-trailer iframe {
+.movie-trailer iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.2);
 }
 
-/* 🚫 אין טריילר */
-.movie-details-container .no-trailer {
-    font-size: 1.1rem;
-    color: #ff6347;
-}
-
-/* 🎟️ טופס דירוג */
 .rating-form {
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin-inline: auto;
 }
 
-/* 🎬 כפתורי דירוג */
 .rating-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
-
-
-/*דירוג-------------*/
 .btn-rate {
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 12px 18px;
     font-size: 1rem;
     font-weight: bold;
+    border-radius: 6px;
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.3s;
+    transition: 0.2s;
 }
-
-/* צבעים לכל דרגת דירוג */
-.btn-rate.bad { background: #B22222; color: white; }
-.btn-rate.meh { background: #FF8C00; color: white; }
-.btn-rate.okay { background: #FFD700; color: black; }
-.btn-rate.great { background: #32CD32; color: white; }
-.btn-rate.awesome { background: #1E90FF; color: white; }
 
 .btn-rate:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    transform: scale(1.07);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
 }
 
+.btn-rate.bad     { background: #B22222; color: white; }
+.btn-rate.meh     { background: #FF8C00; color: white; }
+.btn-rate.okay    { background: #FFD700; color: black; }
+.btn-rate.great   { background: #32CD32; color: white; }
+.btn-rate.awesome { background: #1E90FF; color: white; }
 
-/* 🔑 הודעת חיבור */
-.movie-details-container .login-message {
-    font-size: 1.1rem;
+.login-message {
+    font-size: 1.15rem;
     color: #FFD700;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
-/* 🎬 עיצוב הכותרת של הדירוג */
 .rating-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    color: #FFD700; /* זהב */
-    text-align: center;
-    margin-bottom: 10px;
+    color: #FFD700;
+    margin-bottom: 15px;
     text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.7);
-}
-
-
-
-
-
-/* 🎬 כפתור פרטים נוספים */
-.btn-recomm-details {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background: #B22222;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease-in-out;
-}
-
-.btn-recomm-details:hover {
-    background: #8B0000;
-    box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
 }

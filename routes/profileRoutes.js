@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getProfile, editProfileForm, updateProfile } = require("../controllers/profileController");
+const { getProfile, editProfileForm, updateProfile, updateFavoriteGenreAjax } = require("../controllers/profileController");
 const authMiddleware = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadMiddleware"); // ✅ זה מוודא שגם קבצים ייטופלו
 
@@ -13,5 +13,8 @@ router.get("/edit", authMiddleware, editProfileForm);
 
 // שליחת טופס עריכת פרופיל
 router.post("/edit", authMiddleware, upload.single("profileImage"), updateProfile);
+
+
+router.post("/updateGenre", authMiddleware, updateFavoriteGenreAjax);
 
 module.exports = router;

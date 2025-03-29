@@ -1,10 +1,18 @@
 .profile-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 40px 20px;
     background: url('/images/profile-bg.jpg') center/cover no-repeat;
-}
+    min-height: 100vh;
+  }
+  
+  .profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
 
 .profile-box {
     background: rgba(0, 0, 0, 0.85);
@@ -193,3 +201,56 @@
 .btn-details:hover {
     background-color: #c7003a;
 }
+
+
+
+.genre-select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ffd700;
+    background-color: #111;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .genre-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ffd700;
+  }
+  
+  .profile-and-movies {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 40px 20px;
+    background: url('/images/profile-bg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+  }
+  
+  @media (max-width: 1024px) {
+    .profile-and-movies {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  
+  /* אנימציית כניסה להמלצות */
+  .recommended-section {
+    animation: fadeInUp 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

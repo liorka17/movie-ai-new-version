@@ -1,68 +1,84 @@
 <!DOCTYPE html>
 <html lang="he">
   <%- include('partials/head') %>
-
   <body>
     <%- include('partials/navbar') %>
 
     <main class="profile-container">
-      <div class="profile-box">
-        <h2>👤 הפרופיל שלי</h2>
-        <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
+      <div class="profile-wrapper">
 
-        <% if (user && user.profileImage) { %>
-          <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
-        <% } else { %>
-          <img src="/images/default-avatar.png" alt="ברירת מחדל" class="profile-image">
+        <div class="profile-box">
+          <h2>👤 הפרופיל שלי</h2>
+          <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
+
+          <% if (user && user.profileImage) { %>
+            <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
+          <% } else { %>
+            <img src="/images/default-avatar.png" alt="ברירת מחדל" class="profile-image">
+          <% } %>
+
+          <div class="profile-info">
+            <div class="info-line"><span class="label">שם משתמש:</span> <span class="value"><%= user.username %></span></div>
+            <div class="info-line"><span class="label">אימייל:</span> <span class="value"><%= user.email %></span></div>
+            <div class="info-line"><span class="label">שם מלא:</span> <span class="value"><%= user.fullName || "לא הוזן" %></span></div>
+            <div class="info-line"><span class="label">תאריך לידה:</span> <span class="value"><%= user.birthday ? user.birthday.toISOString().split("T")[0] : "לא הוזן" %></span></div>
+            <div class="info-line"><span class="label">ז'אנר מועדף:</span>
+              <span class="value">
+                <% if (user.favoriteGenre) { %>
+                  <a href="/video/genre/<%= encodeURIComponent(user.favoriteGenre) %>" class="genre-link">
+                    🎭 <%= user.favoriteGenre %>
+                  </a>
+                <% } else { %>
+                  לא הוזן
+                <% } %>
+              </span>
+            </div>
+            <div class="info-line"><span class="label">טלפון:</span> <span class="value"><%= user.phone || "לא הוזן" %></span></div>
+
+            <div class="info-line">
+              <span class="label">ז'אנר מועדף:</span>
+              <span class="value">
+                <select id="genreSelect" class="genre-select">
+                  <% genres.forEach(genre => { %>
+                    <option value="<%= genre.name %>" <%= user.favoriteGenre === genre.name ? 'selected' : '' %>>
+                      <%= genre.name %>
+                    </option>
+                  <% }) %>
+                </select>
+                <span id="genre-update-status" style="margin-right: 10px;"></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <a href="/profile/edit" class="btn-edit">✏️ עריכת פרופיל</a>
+            <a href="/user/logout" class="btn-logout">🚪 יציאה</a>
+            <form id="deleteForm" action="/user/delete" method="post">
+              <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
+            </form>
+          </div>
+        </div>
+
+        <% if (genreMovies && genreMovies.length > 0) { %>
+          <section class="recommended-section">
+            <h3 class="recommended-title">🎬 סרטים מהז'אנר המועדף שלך</h3>
+            <div class="movies-grid">
+              <% genreMovies.forEach(movie => { %>
+                <div class="movie-card">
+                  <div class="movie-image">
+                    <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>">
+                  </div>
+                  <div class="movie-info">
+                    <h4><%= movie.title %></h4>
+                    <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </section>
         <% } %>
 
-        <div class="profile-info">
-          <div class="info-line"><span class="label">שם משתמש:</span> <span class="value"><%= user.username %></span></div>
-          <div class="info-line"><span class="label">אימייל:</span> <span class="value"><%= user.email %></span></div>
-          <div class="info-line"><span class="label">שם מלא:</span> <span class="value"><%= user.fullName || "לא הוזן" %></span></div>
-          <div class="info-line"><span class="label">תאריך לידה:</span> <span class="value"><%= user.birthday ? user.birthday.toISOString().split("T")[0] : "לא הוזן" %></span></div>
-          <div class="info-line"><span class="label">ז'אנר מועדף:</span> 
-            <span class="value">
-              <% if (user.favoriteGenre) { %>
-                <a href="/video/genre/<%= encodeURIComponent(user.favoriteGenre) %>" class="genre-link">
-                  🎭 <%= user.favoriteGenre %>
-                </a>
-              <% } else { %>
-                לא הוזן
-              <% } %>
-            </span>
-          </div>
-          <div class="info-line"><span class="label">טלפון:</span> <span class="value"><%= user.phone || "לא הוזן" %></span></div>
-        </div>
-
-        <div class="profile-actions">
-          <a href="/profile/edit" class="btn-edit">✏️ עריכת פרופיל</a>
-          <a href="/user/logout" class="btn-logout">🚪 יציאה</a>
-          <form id="deleteForm" action="/user/delete" method="post">
-            <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
-          </form>
-        </div>
       </div>
-
-      <% if (genreMovies && genreMovies.length > 0) { %>
-        <section class="recommended-section">
-          <h3 class="recommended-title">🎬 סרטים מהז'אנר המועדף שלך:</h3>
-          <div class="movies-grid">
-            <% genreMovies.forEach(movie => { %>
-              <div class="movie-card">
-                <div class="movie-image">
-                  <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>">
-                </div>
-                <div class="movie-info">
-                  <h4><%= movie.title %></h4>
-                  <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a>
-                </div>
-              </div>
-            <% }) %>
-          </div>
-        </section>
-      <% } %>
-
     </main>
 
     <%- include('partials/footer') %>
