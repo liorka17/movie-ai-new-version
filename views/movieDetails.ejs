@@ -60,19 +60,23 @@
     <% } %>
 
     <div class="comments-section">
-      <h3>💭 תגובות של צופים</h3>
-      <% if (!comments || comments.length === 0) { %>
-        <p>אין עדיין תגובות לסרט הזה</p>
-      <% } else { %>
-        <% comments.forEach(comment => { %>
-          <div class="comment">
-            <strong><%= comment.username || "אנונימי" %></strong> 🕒
-            <%= new Date(comment.createdAt).toLocaleString("he-IL") %>
-            <p><%= comment.content %></p>
-          </div>
-        <% }) %>
-      <% } %>
-    </div>
+        <h3>💭 תגובות של צופים</h3>
+        <% if (!comments || comments.length === 0) { %>
+          <p>אין עדיין תגובות לסרט הזה</p>
+        <% } else { %>
+          <% comments.forEach(comment => { %>
+            <div class="comment">
+              <strong><%= comment.username || "אנונימי" %></strong>
+              <% if (comment.rating) { %>
+                ⭐️ דירוג: <%= comment.rating %>/5
+              <% } %>
+              🕒 <%= new Date(comment.createdAt).toLocaleString("he-IL") %>
+              <p><%= comment.content %></p>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      
   </main>
 
   <%- include('partials/footer') %>

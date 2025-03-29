@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-  movieId: { type: String, required: true }, // מזהה הסרט מ-TMDB
+  movieId: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  username: { type: String }, // אופציונלי להצגה מהירה בלי חיפוש נוסף
+  username: { type: String },
   content: { type: String, required: true },
+  rating: { type: Number, min: 1, max: 5 }, // ⭐️ דירוג אם קיים
   createdAt: { type: Date, default: Date.now }
 });
 
