@@ -1,60 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ chat.js נטען בהצלחה!");
-
     const chatContainer = document.getElementById("chatContainer");
-    const chatMessages = document.getElementById("chat-messages");
-    const chatInput = document.getElementById("chat-input");
-    const sendButton = document.getElementById("chat-send");
     const chatForm = document.getElementById("chat-form");
+    const chatInput = document.getElementById("chat-input");
+    const chatMessages = document.getElementById("chat-messages");
+    const sendButton = document.getElementById("chat-send");
 
-    // ✅ סגירת הצ'אט בלחיצה מחוץ לאזור הצ'אט
-    document.addEventListener("click", function (event) {
-        if (chatContainer.style.display === "block" && !chatContainer.contains(event.target) && !event.target.closest(".chat-bot-button")) {
-            toggleChat();
+    chatContainer.style.display = "none";
+
+    window.toggleChat = function () {
+        const isVisible = chatContainer.style.display === "block";
+        chatContainer.style.display = isVisible ? "none" : "block";
+    };
+
+    document.addEventListener("click", function (e) {
+        if (chatContainer.style.display === "block" &&
+            !chatContainer.contains(e.target) &&
+            !e.target.closest(".chat-toggle")) {
+            chatContainer.style.display = "none";
         }
     });
 
-    sendButton.addEventListener("click", function () {
-        sendMessage();
-    });
-
-    chatInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            sendMessage();
-        }
-    });
-
-    chatForm.addEventListener("submit", function (e) {
+    chatForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-        sendMessage();
-    });
-
-    function sendMessage() {
         const userMessage = chatInput.value.trim();
         if (!userMessage) return;
 
-        chatMessages.innerHTML += `<div class="chat-message user animate">👤 ${userMessage}</div>`;
+        appendMessage("user", `👤 ${userMessage}`);
         chatInput.value = "";
 
-        fetch("/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userMessage }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            chatMessages.innerHTML += `<div class="chat-message bot animate">🤖 ${data.reply}</div>`;
-        })
-        .catch(error => {
-            console.error("❌ שגיאה בשליחת ההודעה:", error);
-            chatMessages.innerHTML += `<div class="chat-message bot error">❌ שגיאה בשליחת הודעה</div>`;
-        });
-    }
-});
+        try {
+            const res = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            });
 
-// ✅ הופך את הפונקציה לגלובלית
-window.toggleChat = function () {
-    const chat = document.getElementById("chatContainer");
-    chat.style.display = chat.style.display === "none" ? "block" : "none";
-    console.log("🔹 מצב הצ'אט שונה ל:", chat.style.display);
-};
+            const data = await res.json();
+            appendMessage("bot", `🤖 ${data.reply}`);
+        } catch (err) {
+            appendMessage("bot", "❌ שגיאה בשליחת ההודעה");
+        }
+    });
+
+    function appendMessage(type, content) {
+        const div = document.createElement("div");
+        div.className = `chat-message ${type}`;
+        div.innerHTML = content;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    window.sendQuickMessage = function (text) {
+        chatInput.value = text;
+        chatForm.dispatchEvent(new Event("submit"));
+    };
+});
