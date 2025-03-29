@@ -788,18 +788,6 @@ footer {
     text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* צל קל */
 }
 
-/* אפקט ריחוף על הכפתור */
-.delete-btn:hover {
-    background-color: #cc0000; /* צבע כהה יותר */
-    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8); /* הוספת זוהר */
-    transform: scale(1.05); /* הגדלה קלה */
-}
-
-/* אנימציה בעת לחיצה */
-.delete-btn:active {
-    transform: scale(0.95); /* הקטנה קלה בעת לחיצה */
-}
-
 
 
 

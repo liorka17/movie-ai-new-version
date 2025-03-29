@@ -1,0 +1,122 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/images/profile-bg.jpg') center/cover no-repeat;
+}
+
+.profile-box {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
+    max-width: 420px;
+    width: 90%;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.profile-box h2 {
+    font-size: 2rem;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+    margin-bottom: 10px;
+}
+
+.profile-subtitle {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.profile-info {
+    text-align: right;
+    margin-bottom: 25px;
+    direction: rtl;
+}
+
+.info-line {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.info-line .label {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.info-line .value {
+    font-weight: normal;
+    color: #fff;
+}
+
+/* 🎯 יישור כפתורים */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.profile-actions button,
+.profile-actions a {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* ✏️ עריכה */
+.btn-edit {
+    background: #007bff;
+    color: white;
+}
+.btn-edit:hover {
+    background: #0056b3;
+}
+
+/* 🚪 יציאה */
+.btn-logout {
+    background: linear-gradient(90deg, #b71c1c, #8e0000);
+    color: white;
+}
+.btn-logout:hover {
+    background: linear-gradient(90deg, #8e0000, #5a0000);
+    box-shadow: 0 4px 10px rgba(183, 28, 28, 0.5);
+}
+
+/* 🗑️ מחיקה */
+.delete-btn {
+    background-color: #ff0000;
+    color: white;
+    border: 2px solid #ffcc00;
+    text-shadow: 1px 1px 3px rgba(255,255,255,0.3);
+}
+.delete-btn:hover {
+    background-color: #cc0000;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+    transform: scale(1.05);
+}
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+/* 🔥 אנימציה חלקה */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

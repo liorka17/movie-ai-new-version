@@ -1,0 +1,35 @@
+/* 🔎 כותרת לעמוד החיפוש */
+.search-title {
+    font-size: 2rem;
+    color: #FFD700; /* זהב */
+    text-align: center;
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+    margin-bottom: 15px;
+}
+
+/* 📦 תיבת החיפוש */
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* 🧾 שדה הקלט של החיפוש */
+#searchInput {
+    width: 60%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #FFD700;
+    border-radius: 25px;
+    outline: none;
+    text-align: center;
+    background-color: #222;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+/* ✨ אפקט פוקוס */
+#searchInput:focus {
+    border-color: #ff4500;
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+}

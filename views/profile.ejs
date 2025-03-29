@@ -1,31 +1,38 @@
 <!DOCTYPE html>
-<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
-<%- include('partials/head') %> <!-- חיבור קובץ ה-HEAD שמכיל את כל הגדרות המטא והסטיילינג -->
+<html lang="he">
+  <%- include('partials/head') %>
 
-<body>
-    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+  <body>
+    <%- include('partials/navbar') %>
 
-    <main class="profile-container"> <!-- מיכל ראשי לעמוד הפרופיל -->
-        <div class="profile-box"> <!-- קופסת תצוגת הפרופיל -->
-            <h2>👤 הפרופיל שלי</h2> <!-- כותרת הדף -->
-            <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p> <!-- תיאור קצר -->
+    <main class="profile-container">
+      <div class="profile-box">
+        <h2>👤 הפרופיל שלי</h2>
+        <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
 
-            <div class="profile-info"> <!-- מיכל מידע המשתמש -->
-                <p><strong>👤 שם משתמש:</strong> <%= user.username %></p> <!-- הצגת שם המשתמש -->
-                <p><strong>📧 אימייל:</strong> <%= user.email %></p> <!-- הצגת כתובת האימייל של המשתמש -->
-            </div>
-
-            <!-- כפתור מחיקת חשבון -->
-            <form id="deleteForm" action="/user/delete" method="post">
-                <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
-            </form>
-            
+        <div class="profile-info">
+          <div class="info-line">
+            <span class="label">שם משתמש:</span>
+            <span class="value"><%= user.username %></span>
+          </div>
+          <div class="info-line">
+            <span class="label">אימייל:</span>
+            <span class="value"><%= user.email %></span>
+          </div>
         </div>
+
+        <div class="profile-actions">
+          <a href="/profile/edit" class="btn-edit">✏️ עריכת פרופיל</a>
+          <a href="/user/logout" class="btn-logout">🚪 יציאה</a>
+
+          <form id="deleteForm" action="/user/delete" method="post">
+            <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
+          </form>
+        </div>
+      </div>
     </main>
 
-    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
-
-    <!-- חיבור לקובץ ה-JS שמונע מחיקות בטעות -->
+    <%- include('partials/footer') %>
     <script src="/script/profile.js"></script>
-</body>
+  </body>
 </html>

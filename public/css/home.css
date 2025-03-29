@@ -1,0 +1,166 @@
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.home-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cinema-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0px 0px 15px #ffcc00;
+}
+
+.cinema-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px;
+}
+
+.cinema-button {
+    background: linear-gradient(90deg, #ff5733, #c70039);
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 87, 51, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.cinema-button:hover {
+    background: linear-gradient(90deg, #c70039, #900c3f);
+    box-shadow: 0px 6px 15px rgba(255, 87, 51, 0.7);
+}
+
+/* פוטר קבוע בתחתית */
+footer {
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+/* אפקט ריחוף על הכפתור */
+.delete-btn:hover {
+    background-color: #cc0000; /* צבע כהה יותר */
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8); /* הוספת זוהר */
+    transform: scale(1.05); /* הגדלה קלה */
+}
+
+/* אנימציה בעת לחיצה */
+.delete-btn:active {
+    transform: scale(0.95); /* הקטנה קלה בעת לחיצה */
+}
+
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 200px; 
+}
+
+
+.stat-box-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.stat-box {
+    width: 250px; /* גודל אחיד */
+    height: 150px; /* גובה אחיד */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff4e50, #fc913a);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.stat-box h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-align: center;
+    white-space: nowrap; /* מונע שבירת שורות */
+}
+
+.stat-box p {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.stat-box-link:hover .stat-box {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+
+/* 🔥 אנימציות */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+
+
+.stat-box-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.stat-box-link:hover .stat-box {
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+
+
+.cinema-light {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 500px;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+    transform: translateX(-50%);
+    z-index: -1;
+    animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
