@@ -1,5 +1,7 @@
 const express = require("express"); // מייבא את אקספרס לצורך ניתוב
 const router = express.Router(); // יוצר אובייקט ניתוב
+const Comment = require('../models/Comment');
+
 
 const { getGallery, getMovieDetails, searchMovies, SearchPage, getSiteStats,galleryByGenre } = require('../controllers/videoController'); // מייבא את פונקציות בקרת הווידאו
 

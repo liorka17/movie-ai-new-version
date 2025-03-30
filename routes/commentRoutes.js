@@ -1,9 +1,17 @@
-// routes/commentRoutes.js
 const express = require('express');
 const router = express.Router();
-const { postComment } = require('../controllers/commentController');
-const authMiddleware = require('../middleware/authMiddleware'); // אם יש לך
+const Comment = require('../models/Comment');
 
-router.post('/comment', authMiddleware, postComment);
+
+const auth = require('../middleware/authMiddleware');
+const {postComment,deleteComment,editCommentForm,updateComment
+} = require('../controllers/commentController');
+
+router.post('/comment', auth, postComment);
+router.get('/comment/:id/edit', auth, editCommentForm);
+router.post('/comment/:id/edit', auth, updateComment);
+router.post('/comment/:id/delete', auth, deleteComment);
 
 module.exports = router;
+
+

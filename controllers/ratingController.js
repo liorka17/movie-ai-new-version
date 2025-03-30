@@ -1,5 +1,7 @@
 const Rating = require("../models/rating"); // מייבא את מודל הדירוגים מתוך תיקיית מודלס
 
+
+
 // פונקציה זו מקבלת דירוג של משתמש לסרט, מעדכנת דירוג קיים או יוצרת חדש במקרה הצורך.
 exports.submitRating = async (req, res) => {
     try {

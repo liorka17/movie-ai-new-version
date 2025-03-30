@@ -35,6 +35,12 @@ exports.getMovieDetails = async (req, res) => {
       }
   
       const comments = await Comment.find({ movieId }).sort({ createdAt: -1 }).lean();
+
+      // הפוך את userId למחרוזת
+      comments.forEach(comment => {
+        comment.userId = comment.userId?.toString(); 
+      });
+      
       console.log("💬 comments loaded:", comments.length);
   
       res.render("movieDetails", {

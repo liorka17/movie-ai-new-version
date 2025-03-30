@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="he">
+<%- include('partials/head') %>
+
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="edit-comment-container">
+    <div class="edit-box">
+      <h2>✏️ עריכת תגובה</h2>
+
+      <form action="/comment/<%= comment._id %>/edit" method="POST">
+        <textarea name="content" required><%= comment.content %></textarea>
+        <div class="actions">
+          <button type="submit">💾 שמור</button>
+          <a href="javascript:history.back()">↩️ חזור</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

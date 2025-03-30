@@ -2,7 +2,6 @@ const express = require('express'); // מייבא את אקספרס לצורך �
 const router = express.Router(); // יוצר אובייקט ניתוב חדש
 const authMiddleware = require('../middleware/authMiddleware'); // מייבא את המידלוור לאימות משתמשים
 const axios = require('axios'); // מייבא את אקסיוס לביצוע בקשות HTTP
-
 const videoController = require("../controllers/videoController"); // מייבא את בקרת הווידאו
 
 // פונקציה זו אחראית על טעינת דף הבית ושליפת סטטיסטיקות על סרטים מהבקר של הסרטים

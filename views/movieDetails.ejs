@@ -65,20 +65,30 @@
           <p>אין עדיין תגובות לסרט הזה</p>
         <% } else { %>
           <% comments.forEach(comment => { %>
+            
             <div class="comment">
               <strong><%= comment.username || "אנונימי" %></strong>
               <% if (comment.rating) { %>
                 ⭐️ דירוג: <%= comment.rating %>/5
               <% } %>
               🕒 <%= new Date(comment.createdAt).toLocaleString("he-IL") %>
-              <p><%= comment.content %></p>
+              <p><%= comment.content %></p>  
+              <% if (user && user._id && comment.userId && String(comment.userId) === String(user._id)) { %>
+                <div class="comment-actions">
+                  <form action="/comment/<%= comment._id %>/delete" method="POST" style="display:inline;">
+                    <button type="submit">🗑️ מחק</button>
+                  </form>
+                  <a href="/comment/<%= comment._id %>/edit" class="edit-link">✏️ ערוך</a>
+                </div>
+              <% } %>                         
             </div>
           <% }) %>
         <% } %>
-      </div>
-      
+      </div>      
+
   </main>
 
+  
   <%- include('partials/footer') %>
   <script src="/script/rating.js"></script>
 </body>
