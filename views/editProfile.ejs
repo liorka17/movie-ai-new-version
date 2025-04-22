@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- מגדיר את סוג המסמך כ-HTML5 -->
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- כולל את קובץ head עם כל ה-meta, css, title וכו' -->
 
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את סרגל הניווט העליון -->
 
-  <main class="register-container">
-    <div class="register-box">
-      <h2>✏️ עריכת פרופיל</h2>
-      <p class="register-subtitle">עדכן את הפרטים האישיים שלך</p>
+  <main class="register-container"> <!-- קונטיינר ראשי לעיצוב -->
+    <div class="register-box"> <!-- קופסה עוטפת את טופס העריכה -->
+      <h2>✏️ עריכת פרופיל</h2> <!-- כותרת ראשית -->
+      <p class="register-subtitle">עדכן את הפרטים האישיים שלך</p> <!-- תיאור מתחת לכותרת -->
 
-      <form action="/profile/edit" method="POST" enctype="multipart/form-data" class="register-grid">
+      <form action="/profile/edit" method="POST" enctype="multipart/form-data" class="register-grid"> <!-- טופס עריכת פרופיל עם תמיכה בקבצים -->
         <div class="input-group">
-          <label for="username">שם משתמש 👤</label>
-          <input type="text" id="username" name="username" value="<%= user.username %>" required />
+          <label for="username">שם משתמש 👤</label> <!-- תווית -->
+          <input type="text" id="username" name="username" value="<%= user.username %>" required /> <!-- שדה עם ערך מהמשתמש -->
         </div>
 
         <div class="input-group">
@@ -34,7 +34,7 @@
         <!-- 🎬 בחירת ז'אנר מועדף -->
         <div class="input-group">
           <label for="favoriteGenre">ז'אנר מועדף 🎬</label>
-          <select id="favoriteGenre" name="favoriteGenre">
+          <select id="favoriteGenre" name="favoriteGenre"> <!-- רשימת ז'אנרים -->
             <option value="">בחר ז'אנר מועדף</option>
             <option value="אקשן" <%= user.favoriteGenre === 'אקשן' ? 'selected' : '' %>>אקשן</option>
             <option value="קומדיה" <%= user.favoriteGenre === 'קומדיה' ? 'selected' : '' %>>קומדיה</option>
@@ -57,20 +57,20 @@
 
         <div class="input-group full-width">
           <label for="profileImage">תמונת פרופיל 📷</label>
-          <input type="file" id="profileImage" name="profileImage" accept="image/*" />
+          <input type="file" id="profileImage" name="profileImage" accept="image/*" /> <!-- קלט קובץ (תמונה) -->
         </div>
 
         <div class="input-group full-width">
-          <button type="submit" class="btn-register">💾 שמור שינויים</button>
+          <button type="submit" class="btn-register">💾 שמור שינויים</button> <!-- כפתור שמירה -->
         </div>
       </form>
 
       <div class="login-link">
-        <a href="/profile">🔙 חזור לפרופיל</a>
+        <a href="/profile">🔙 חזור לפרופיל</a> <!-- קישור חזרה לעמוד הפרופיל -->
       </div>
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> <!-- כולל את ה-footer הכללי -->
 </body>
 </html>

@@ -1,32 +1,33 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- הגדרת המסמך כ־HTML5 -->
+<html lang="he"> <!-- שפת הדף: עברית -->
+<%- include('partials/head') %> <!-- כולל את קובץ ה-head (meta, title, css וכו') -->
+
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את סרגל הניווט העליון -->
 
-  <main class="gallery-container"> <!-- אותה קלאסה של הגלריה -->
-    <h1>🎬 המלצות מותאמות עבורך</h1>
+  <main class="gallery-container"> <!-- אותה קלאסה כמו הגלריה הרגילה כדי לשמור על אחידות עיצוב -->
+    <h1>🎬 המלצות מותאמות עבורך</h1> <!-- כותרת עמוד -->
 
-    <% if (message) { %>
+    <% if (message) { %> <!-- אם קיימת הודעה להצגה (למשל: "לא נמצאו המלצות") -->
       <p class="info-message"><%= message %></p>
     <% } %>
 
-    <div class="movies-grid"> <!-- כמו בגלריה -->
-      <% recommendations.forEach(movie => { %>
-        <div class="movie-card">
-          <div class="movie-image">
-            <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+    <div class="movies-grid"> <!-- גריד להצגת כרטיסי הסרטים, בדיוק כמו בגלריה -->
+      <% recommendations.forEach(movie => { %> <!-- לולאה על מערך הסרטים המומלצים -->
+        <div class="movie-card"> <!-- כרטיס סרט -->
+          <div class="movie-image"> <!-- אזור תמונה -->
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>"> <!-- פוסטר הסרט -->
           </div>
-          <div class="movie-info">
-            <h3><%= movie.title %></h3>
-            <p><%= movie.overview || "אין תקציר זמין" %></p>
-            <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a>
+          <div class="movie-info"> <!-- פרטי הסרט -->
+            <h3><%= movie.title %></h3> <!-- שם הסרט -->
+            <p><%= movie.overview || "אין תקציר זמין" %></p> <!-- תקציר או ברירת מחדל -->
+            <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a> <!-- קישור לעמוד הסרט -->
           </div>
         </div>
       <% }) %>
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> <!-- כולל את הפוטר -->
 </body>
 </html>

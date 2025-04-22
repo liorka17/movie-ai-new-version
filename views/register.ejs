@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- מגדיר את המסמך כ-HTML5 -->
+<html lang="he"> <!-- שפת הדף: עברית -->
+<%- include('partials/head') %> <!-- כולל את קובץ ה-head (meta, title, css וכו') -->
 
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את הניווט העליון -->
 
-  <main class="register-container">
-    <div class="register-box">
-      <h2>🎟️ הרשמה למועדון הקולנוע</h2>
-      <p class="register-subtitle">קבל גישה להמלצות סרטים מותאמות אישית 🍿</p>
+  <main class="register-container"> <!-- קונטיינר ראשי של עמוד ההרשמה -->
+    <div class="register-box"> <!-- תיבת ההרשמה -->
+      <h2>🎟️ הרשמה למועדון הקולנוע</h2> <!-- כותרת ראשית -->
+      <p class="register-subtitle">קבל גישה להמלצות סרטים מותאמות אישית 🍿</p> <!-- טקסט תיאור -->
 
-      <form action="/user/register" method="POST" enctype="multipart/form-data" class="register-grid">
+      <form action="/user/register" method="POST" enctype="multipart/form-data" class="register-grid"> <!-- טופס הרשמה עם תמיכה בקבצים -->
         <div class="input-group">
           <label for="username">שם משתמש 👤</label>
           <input type="text" id="username" name="username" required />
@@ -18,12 +18,12 @@
 
         <div class="input-group">
           <label for="email">כתובת אימייל 📧</label>
-          <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
+          <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" /> <!-- ולידציה בסיסית לאימייל -->
         </div>
 
         <div class="input-group">
           <label for="password">סיסמה 🔒</label>
-          <input type="password" id="password" name="password" required minlength="6" />
+          <input type="password" id="password" name="password" required minlength="6" /> <!-- מינימום 6 תווים -->
         </div>
 
         <div class="input-group">
@@ -38,37 +38,37 @@
 
         <div class="input-group">
           <label for="favoriteGenre">ז'אנר מועדף 🎬</label>
-          <select id="favoriteGenre" name="favoriteGenre" required>
+          <select id="favoriteGenre" name="favoriteGenre" required> <!-- שדה בחירה של ז'אנר -->
             <option value="">בחר ז'אנר מועדף</option>
-            <% if (genres && genres.length > 0) { %>
+            <% if (genres && genres.length > 0) { %> <!-- אם יש ז'אנרים -->
               <% genres.forEach(genre => { %>
-                <option value="<%= genre.id %>"><%= genre.name %></option>
+                <option value="<%= genre.id %>"><%= genre.name %></option> <!-- מציג את שם הז'אנר -->
               <% }) %>
             <% } else { %>
-              <option value="">⚠️ לא נמצאו ז'אנרים</option>
+              <option value="">⚠️ לא נמצאו ז'אנרים</option> <!-- fallback אם אין נתונים -->
             <% } %>
           </select>
         </div>
 
         <div class="input-group">
           <label for="phone">מספר טלפון 📱</label>
-          <input type="tel" id="phone" name="phone" pattern="^0[5-9]\d{7,8}$" placeholder="05X-XXXXXXX" />
+          <input type="tel" id="phone" name="phone" pattern="^0[5-9]\d{7,8}$" placeholder="05X-XXXXXXX" /> <!-- ולידציה למספר ישראלי -->
         </div>
 
         <div class="input-group full-width">
           <label for="profileImage">תמונת פרופיל 📷</label>
-          <input type="file" id="profileImage" name="profileImage" accept="image/*" />
+          <input type="file" id="profileImage" name="profileImage" accept="image/*" /> <!-- העלאת תמונה -->
         </div>
 
         <div class="full-width">
-          <button type="submit" class="btn-register">✨ הצטרף עכשיו</button>
+          <button type="submit" class="btn-register">✨ הצטרף עכשיו</button> <!-- כפתור שליחה -->
         </div>
       </form>
 
-      <p class="login-link">כבר רשום? <a href="/login">🎬 התחבר עכשיו</a></p>
+      <p class="login-link">כבר רשום? <a href="/login">🎬 התחבר עכשיו</a></p> <!-- קישור להתחברות -->
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> <!-- כולל את הפוטר -->
 </body>
 </html>

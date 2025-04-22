@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- מגדיר את המסמך כ־HTML5 -->
+<html lang="he"> <!-- שפת המסמך בעברית -->
+<%- include('partials/head') %> <!-- כולל את החלק העליון עם title, css, meta וכו' -->
 
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את הניווט העליון -->
 
-  <main class="movie-details-container">
-    <h2>🎬 <%= movie.title %></h2>
+  <main class="movie-details-container"> <!-- קונטיינר ראשי לפרטי הסרט -->
+    <h2>🎬 <%= movie.title %></h2> <!-- שם הסרט -->
 
-    <% if (success) { %>
+    <% if (success) { %> <!-- הודעת הצלחה לדירוג -->
       <div class="success-message">✅ הדירוג נשמר בהצלחה</div>
     <% } %>
 
-    <div class="movie-content">
-      <div class="movie-image">
-        <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>">
+    <div class="movie-content"> <!-- אזור תוכן הסרט -->
+      <div class="movie-image"> <!-- אזור תמונה -->
+        <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>"> <!-- פוסטר הסרט -->
       </div>
 
-      <div class="movie-info">
+      <div class="movie-info"> <!-- פרטים נוספים על הסרט -->
         <p class="movie-overview">
           <strong>📜 תקציר:</strong>
-          <%= movie.overview || "לא נמצא תקציר בעברית" %>
+          <%= movie.overview || "לא נמצא תקציר בעברית" %> <!-- תקציר הסרט או ברירת מחדל -->
         </p>
 
-        <% if (trailer) { %>
+        <% if (trailer) { %> <!-- אם יש טריילר -->
           <div class="movie-trailer">
-            <iframe width="560" height="315" src="<%= trailer %>" frameborder="0" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="<%= trailer %>" frameborder="0" allowfullscreen></iframe> <!-- טריילר מוטמע -->
           </div>
         <% } else { %>
-          <p class="no-trailer">🚫 אין טריילר זמין</p>
+          <p class="no-trailer">🚫 אין טריילר זמין</p> <!-- הודעה אם אין טריילר -->
         <% } %>
 
-        <% if (user) { %>
-          <form action="/rating/submit" method="POST" class="rating-form">
-            <input type="hidden" name="movieId" value="<%= movie.id %>">
+        <% if (user) { %> <!-- רק אם המשתמש מחובר -->
+          <form action="/rating/submit" method="POST" class="rating-form"> <!-- טופס דירוג -->
+            <input type="hidden" name="movieId" value="<%= movie.id %>"> <!-- מזהה הסרט -->
             <p class="rating-title">🍿 דרגו את הסרט וקבלו המלצות מדויקות</p>
-            <div class="rating-buttons">
+            <div class="rating-buttons"> <!-- כפתורי דירוג -->
               <button type="submit" name="rating" value="1" class="btn-rate bad">😠 גרוע</button>
               <button type="submit" name="rating" value="2" class="btn-rate meh">😐 סביר</button>
               <button type="submit" name="rating" value="3" class="btn-rate okay">🙂 טוב</button>
@@ -44,12 +44,12 @@
             </div>
           </form>
         <% } else { %>
-          <p class="login-message">🔑 עליך להתחבר כדי לדרג סרטים</p>
+          <p class="login-message">🔑 עליך להתחבר כדי לדרג סרטים</p> <!-- הודעה למשתמש לא מחובר -->
         <% } %>
       </div>
     </div>
 
-    <% if (user) { %>
+    <% if (user) { %> <!-- טופס תגובה רק למשתמשים מחוברים -->
       <form action="/comment" method="POST" class="comment-form">
         <input type="hidden" name="movieId" value="<%= movie.id %>">
         <textarea name="content" placeholder="כתוב תגובה על הסרט..." required></textarea>
@@ -59,21 +59,20 @@
       <p class="login-message">🔑 עליך להתחבר כדי לכתוב תגובות</p>
     <% } %>
 
-    <div class="comments-section">
+    <div class="comments-section"> <!-- אזור תגובות -->
         <h3>💭 תגובות של צופים</h3>
-        <% if (!comments || comments.length === 0) { %>
+        <% if (!comments || comments.length === 0) { %> <!-- אם אין תגובות -->
           <p>אין עדיין תגובות לסרט הזה</p>
         <% } else { %>
-          <% comments.forEach(comment => { %>
-            
+          <% comments.forEach(comment => { %> <!-- לולאה על כל תגובה -->
             <div class="comment">
-              <strong><%= comment.username || "אנונימי" %></strong>
+              <strong><%= comment.username || "אנונימי" %></strong> <!-- שם משתמש -->
               <% if (comment.rating) { %>
                 ⭐️ דירוג: <%= comment.rating %>/5
               <% } %>
-              🕒 <%= new Date(comment.createdAt).toLocaleString("he-IL") %>
-              <p><%= comment.content %></p>  
-              <% if (user && user._id && comment.userId && String(comment.userId) === String(user._id)) { %>
+              🕒 <%= new Date(comment.createdAt).toLocaleString("he-IL") %> <!-- תאריך התגובה -->
+              <p><%= comment.content %></p> <!-- תוכן התגובה -->
+              <% if (user && user._id && comment.userId && String(comment.userId) === String(user._id)) { %> <!-- אפשרות עריכה רק למי שכתב -->
                 <div class="comment-actions">
                   <form action="/comment/<%= comment._id %>/delete" method="POST" style="display:inline;">
                     <button type="submit">🗑️ מחק</button>
@@ -85,11 +84,9 @@
           <% }) %>
         <% } %>
       </div>      
-
   </main>
 
-  
-  <%- include('partials/footer') %>
-  <script src="/script/rating.js"></script>
+  <%- include('partials/footer') %> <!-- כולל את הפוטר -->
+  <script src="/script/rating.js"></script> <!-- סקריפט לדירוג (במידה ויש שימוש) -->
 </body>
 </html>

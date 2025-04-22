@@ -1,28 +1,28 @@
-<div class="chat-toggle" onclick="toggleChat()">
-    <img src="/assets/icons/robot-icon.png" alt="Chat with Jimmy">
+<div class="chat-toggle" onclick="toggleChat()"> <!-- כפתור לפתיחת/סגירת הצ'אט -->
+    <img src="/assets/icons/robot-icon.png" alt="Chat with Jimmy"> <!-- אייקון של הרובוט -->
 </div>
 
-<div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <span>🎬 ג'ימי - המלצות סרטים</span>
-        <button class="chat-close" onclick="toggleChat()">❌</button>
+<div class="chat-container" id="chatContainer"> <!-- קונטיינר הצ'אט הראשי (מוסתר כברירת מחדל) -->
+    <div class="chat-header"> <!-- כותרת הצ'אט -->
+        <span>🎬 ג'ימי - המלצות סרטים</span> <!-- טקסט הכותרת -->
+        <button class="chat-close" onclick="toggleChat()">❌</button> <!-- כפתור לסגירת הצ'אט -->
     </div>
 
-    <div class="quick-buttons">
+    <div class="quick-buttons"> <!-- כפתורי קיצור לשליחת הודעות מוכנות -->
         <button onclick="sendQuickMessage('תמליץ לי סרט מצחיק')">😂 מצחיק</button>
         <button onclick="sendQuickMessage('תמליץ לי סרט אימה')">👻 אימה</button>
         <button onclick="sendQuickMessage('תמליץ לי רומנטי')">💖 רומנטי</button>
         <button onclick="sendQuickMessage('תמליץ לי סרט אקשן')">💥 אקשן</button>
     </div>
 
-    <div class="chat-box" id="chat-messages">
-        <div class="chat-message bot">👋 שלום! אני ג'ימי, תן לי לעזור לך למצוא סרט מעולה! 🎥</div>
+    <div class="chat-box" id="chat-messages"> <!-- אזור ההודעות בצ'אט -->
+        <div class="chat-message bot">👋 שלום! אני ג'ימי, תן לי לעזור לך למצוא סרט מעולה! 🎥</div> <!-- הודעה ברירת מחדל מהבוט -->
     </div>
 
-    <form id="chat-form">
-        <div class="chat-input">
-            <input type="text" id="chat-input" placeholder="שאל אותי על סרטים..." required />
-            <button type="submit" id="chat-send">שלח</button>
+    <form id="chat-form"> <!-- טופס לשליחת הודעה -->
+        <div class="chat-input"> <!-- אזור קלט וכפתור שליחה -->
+            <input type="text" id="chat-input" placeholder="שאל אותי על סרטים..." required /> <!-- שדה קלט להודעה -->
+            <button type="submit" id="chat-send">שלח</button> <!-- כפתור שליחה -->
         </div>
     </form>
 </div>

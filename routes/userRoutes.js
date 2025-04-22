@@ -3,9 +3,7 @@ const { register, login, logout,deleteUser,registerPage,registerForm } = require
 const router = express.Router(); // יוצר אובייקט ניתוב
 const upload = require("../middleware/uploadMiddleware"); // 📷 מידלוור להעלאת תמונת פרופיל
 
-
 // נתיבים לטיפול בפעולות משתמשים - הרשמה, התחברות והתנתקות
-
 router.post('/register', upload.single("profileImage"), register);
 router.post('/login', login); // נתיב להתחברות משתמש קיים
 router.get('/logout', logout); // נתיב להתנתקות מהמערכת

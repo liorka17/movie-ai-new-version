@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- מגדיר את סוג המסמך כ-HTML5 -->
+<html lang="he"> <!-- קובע שהשפה של הדף היא עברית -->
+<%- include('partials/head') %> <!-- כולל את הקובץ head.ejs (מטען CSSים, טייטל, סקריפטים וכו') -->
 
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את הניווט העליון -->
 
-  <main class="edit-comment-container">
-    <div class="edit-box">
-      <h2>✏️ עריכת תגובה</h2>
+  <main class="edit-comment-container"> <!-- אזור התוכן הראשי עם קלאס לעיצוב -->
+    <div class="edit-box"> <!-- קופסת העריכה -->
+      <h2>✏️ עריכת תגובה</h2> <!-- כותרת -->
 
-      <form action="/comment/<%= comment._id %>/edit" method="POST">
-        <textarea name="content" required><%= comment.content %></textarea>
-        <div class="actions">
-          <button type="submit">💾 שמור</button>
-          <a href="javascript:history.back()">↩️ חזור</a>
+      <form action="/comment/<%= comment._id %>/edit" method="POST"> <!-- טופס לשליחת עריכת תגובה לפי מזהה -->
+        <textarea name="content" required><%= comment.content %></textarea> <!-- שדה טקסט עם התגובה הקיימת -->
+        <div class="actions"> <!-- אזור כפתורים -->
+          <button type="submit">💾 שמור</button> <!-- כפתור שמירה -->
+          <a href="javascript:history.back()">↩️ חזור</a> <!-- קישור לחזרה לעמוד הקודם -->
         </div>
       </form>
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> <!-- כולל את הקובץ footer.ejs -->
 </body>
 </html>

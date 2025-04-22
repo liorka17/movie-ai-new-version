@@ -32,20 +32,21 @@ exports.LoginPage = (req, res) => {
 };
 
 
-exports.RegisterPage = async (req, res) => {
+exports.RegisterPage = async (req, res) => { // פונקציה שמציגה את עמוד ההרשמה עם ז'אנרים מה-TMDB
   try {
-    const response = await axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {
+    const response = await axios.get(`https://api.themoviedb.org/3/genre/movie/list`, { // שולח בקשה ל-TMDB לקבלת רשימת ז'אנרים
       params: {
-        api_key: process.env.TMDB_API_KEY,
-        language: 'he'
+        api_key: process.env.TMDB_API_KEY, // משתמש במפתח API מהסביבה
+        language: 'he' // מקבל תוצאות בעברית
       }
     });
 
-    const genres = response.data.genres || [];
-    res.render("register", { genres }); // 👈 שולח genres ל-EJS
+    const genres = response.data.genres || []; // שומר את רשימת הז'אנרים או מערך ריק אם אין
+    res.render("register", { genres }); // 👈 שולח את רשימת הז'אנרים לעמוד register.ejs
 
   } catch (err) {
-    console.error("❌ Error loading genres:", err.message);
-    res.render("register", { genres: [] }); // 👈 שולח ריק אם יש שגיאה
+    console.error("❌ Error loading genres:", err.message); // מדפיס שגיאה במקרה של כשלון
+    res.render("register", { genres: [] }); // 👈 שולח מערך ריק לעמוד אם יש שגיאה
   }
 };
+

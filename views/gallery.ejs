@@ -1,41 +1,42 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- מגדיר את סוג המסמך כ-HTML5 -->
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- כולל את קובץ ה-head עם title, קישורי CSS, meta וכו' -->
+
 <body>
-  <%- include('partials/navbar') %>
+  <%- include('partials/navbar') %> <!-- כולל את תפריט הניווט העליון -->
 
-  <main class="gallery-container">
-    <h1>🎥 סרטים חמים עכשיו</h1>
+  <main class="gallery-container"> <!-- קונטיינר לעמוד הגלריה -->
+    <h1>🎥 סרטים חמים עכשיו</h1> <!-- כותרת עמוד -->
 
-    <div class="movies-grid">
-      <% if (movies && movies.length > 0) { %>
-        <% movies.forEach(movie => { %>
-          <div class="movie-card">
-            <div class="movie-image">
-              <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>">
+    <div class="movies-grid"> <!-- גריד להצגת כרטיסי סרטים -->
+      <% if (movies && movies.length > 0) { %> <!-- אם קיימת רשימת סרטים -->
+        <% movies.forEach(movie => { %> <!-- לולאה על כל סרט -->
+          <div class="movie-card"> <!-- כרטיס סרט -->
+            <div class="movie-image"> <!-- תמונת הסרט -->
+              <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>"> <!-- פוסטר הסרט -->
             </div>
-            <div class="movie-info">
-              <h3><%= movie.title %></h3>
-              <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a>
+            <div class="movie-info"> <!-- מידע על הסרט -->
+              <h3><%= movie.title %></h3> <!-- שם הסרט -->
+              <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a> <!-- כפתור קישור לדף פרטי הסרט -->
             </div>
           </div>
-        <% }); %>
-      <% } else { %>
-        <p class="error-message">⚠️ לא נמצאו סרטים</p>
+        <% }); %> <!-- סוף הלולאה -->
+      <% } else { %> <!-- אם אין סרטים -->
+        <p class="error-message">⚠️ לא נמצאו סרטים</p> <!-- הודעה אם הרשימה ריקה -->
       <% } %>
     </div>
 
-    <div class="pagination">
-      <% if (page > 1) { %>
+    <div class="pagination"> <!-- אזור ניווט בין עמודים -->
+      <% if (page > 1) { %> <!-- אם יש עמוד קודם -->
         <a href="/video/gallery?page=<%= page - 1 %>" class="page-btn">⬅️ עמוד קודם</a>
       <% } %>
-      <span class="page-number">עמוד <%= page %></span>
-      <% if (movies.length === 20) { %>
+      <span class="page-number">עמוד <%= page %></span> <!-- מציג את מספר העמוד הנוכחי -->
+      <% if (movies.length === 20) { %> <!-- אם יש בדיוק 20 סרטים, מניח שיש עוד עמודים -->
         <a href="/video/gallery?page=<%= page + 1 %>" class="page-btn">עמוד הבא ➡️</a>
       <% } %>
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <%- include('partials/footer') %> <!-- כולל את הפוטר הכללי -->
 </body>
 </html>

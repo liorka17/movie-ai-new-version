@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="he">
-<%- include('partials/head') %>
+<!DOCTYPE html> <!-- הגדרת המסמך כ־HTML5 -->
+<html lang="he"> <!-- שפת הדף עברית -->
+<%- include('partials/head') %> <!-- כולל את ה-head (meta, title, css וכו') -->
 
 <body>
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar') %> <!-- כולל את סרגל הניווט העליון -->
 
-    <main class="search-container">
-        <h1 class="search-title">🔍 חיפוש סרטים</h1>
+    <main class="search-container"> <!-- קונטיינר ראשי לחיפוש -->
+        <h1 class="search-title">🔍 חיפוש סרטים</h1> <!-- כותרת עמוד -->
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="הקלידו שם סרט בעברית או באנגלית">
+        <div class="search-box"> <!-- תיבת קלט לחיפוש -->
+            <input type="text" id="searchInput" placeholder="הקלידו שם סרט בעברית או באנגלית"> <!-- שדה קלט -->
         </div>
 
-        <div id="searchResults" class="movies-grid"></div>
+        <div id="searchResults" class="movies-grid"></div> <!-- כאן יופיעו תוצאות החיפוש -->
     </main>
 
-    <%- include('partials/footer') %>
-    <script src="/script/search.js"></script>
+    <%- include('partials/footer') %> <!-- כולל את הפוטר -->
+    <script src="/script/search.js"></script> <!-- סקריפט שמטפל בפונקציית החיפוש -->
 </body>
 </html>
-
-

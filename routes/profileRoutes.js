@@ -1,20 +1,25 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express"); // מייבא את express
+const router = express.Router(); // יוצר מופע של ראוטר
 
-const { getProfile, editProfileForm, updateProfile, updateFavoriteGenreAjax } = require("../controllers/profileController");
-const authMiddleware = require("../middleware/authMiddleware");
-const upload = require("../middleware/uploadMiddleware"); // ✅ זה מוודא שגם קבצים ייטופלו
+const {
+  getProfile, // פונקציה להצגת עמוד הפרופיל
+  editProfileForm, // פונקציה להצגת טופס עריכת פרופיל
+  updateProfile, // פונקציה ששומרת את השינויים
+  updateFavoriteGenreAjax // עדכון ז'אנר מועדף דרך AJAX
+} = require("../controllers/profileController"); // מייבא את הפונקציות מקונטרולר הפרופיל
+
+const authMiddleware = require("../middleware/authMiddleware"); // מוודא שהמשתמש מחובר
+const upload = require("../middleware/uploadMiddleware"); // ✅ זה מוודא שגם קבצים ייטופלו (למשל תמונת פרופיל)
 
 // צפייה בפרופיל
-router.get("/", authMiddleware, getProfile);
+router.get("/", authMiddleware, getProfile); // GET /profile – הצגת פרופיל של המשתמש המחובר
 
 // דף עריכת פרופיל
-router.get("/edit", authMiddleware, editProfileForm);
+router.get("/edit", authMiddleware, editProfileForm); // GET /profile/edit – טופס עריכת פרופיל
 
 // שליחת טופס עריכת פרופיל
-router.post("/edit", authMiddleware, upload.single("profileImage"), updateProfile);
+router.post("/edit", authMiddleware, upload.single("profileImage"), updateProfile); // POST עם תמונה מעודכנת
 
+router.post("/updateGenre", authMiddleware, updateFavoriteGenreAjax); // עדכון ז'אנר מועדף ב-AJAX
 
-router.post("/updateGenre", authMiddleware, updateFavoriteGenreAjax);
-
-module.exports = router;
+module.exports = router; // מייצא את הראוטר לשימוש באפליקציה

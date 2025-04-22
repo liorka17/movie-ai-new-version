@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html lang="he">
-  <%- include('partials/head') %>
+<!DOCTYPE html> <!-- הגדרת המסמך כ־HTML5 -->
+<html lang="he"> <!-- שפת הדף עברית -->
+  <%- include('partials/head') %> <!-- כולל את החלק העליון (meta, title, css וכו') -->
+
   <body>
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar') %> <!-- כולל את סרגל הניווט העליון -->
 
-    <main class="profile-container">
-      <div class="profile-wrapper">
+    <main class="profile-container"> <!-- קונטיינר ראשי לעמוד הפרופיל -->
+      <div class="profile-wrapper"> <!-- עוטף את התוכן המרכזי של הפרופיל -->
 
-        <div class="profile-box">
+        <div class="profile-box"> <!-- תיבת פרופיל -->
           <h2>👤 הפרופיל שלי</h2>
           <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p>
 
-          <% if (user && user.profileImage) { %>
+          <% if (user && user.profileImage) { %> <!-- אם יש תמונת פרופיל -->
             <img src="<%= user.profileImage %>" alt="תמונת פרופיל" class="profile-image">
-          <% } else { %>
+          <% } else { %> <!-- אם אין – תמונה ברירת מחדל -->
             <img src="/images/default-avatar.png" alt="ברירת מחדל" class="profile-image">
           <% } %>
 
-          <div class="profile-info">
+          <div class="profile-info"> <!-- טבלת המידע על המשתמש -->
             <div class="info-line"><span class="label">שם משתמש:</span> <span class="value"><%= user.username %></span></div>
             <div class="info-line"><span class="label">אימייל:</span> <span class="value"><%= user.email %></span></div>
             <div class="info-line"><span class="label">שם מלא:</span> <span class="value"><%= user.fullName || "לא הוזן" %></span></div>
             <div class="info-line"><span class="label">תאריך לידה:</span> <span class="value"><%= user.birthday ? user.birthday.toISOString().split("T")[0] : "לא הוזן" %></span></div>
+
             <div class="info-line"><span class="label">ז'אנר מועדף:</span>
               <span class="value">
-                <% if (user.favoriteGenre) { %>
+                <% if (user.favoriteGenre) { %> <!-- אם קיים ז'אנר מועדף -->
                   <a href="/video/genre/<%= encodeURIComponent(user.favoriteGenre) %>" class="genre-link">
                     🎭 <%= user.favoriteGenre %>
                   </a>
@@ -33,24 +35,26 @@
                 <% } %>
               </span>
             </div>
+
             <div class="info-line"><span class="label">טלפון:</span> <span class="value"><%= user.phone || "לא הוזן" %></span></div>
 
+            <!-- החלפה דינמית של ז'אנר מועדף -->
             <div class="info-line">
               <span class="label">ז'אנר מועדף:</span>
               <span class="value">
-                <select id="genreSelect" class="genre-select">
+                <select id="genreSelect" class="genre-select"> <!-- dropdown לבחירת ז'אנר -->
                   <% genres.forEach(genre => { %>
                     <option value="<%= genre.name %>" <%= user.favoriteGenre === genre.name ? 'selected' : '' %>>
                       <%= genre.name %>
                     </option>
                   <% }) %>
                 </select>
-                <span id="genre-update-status" style="margin-right: 10px;"></span>
+                <span id="genre-update-status" style="margin-right: 10px;"></span> <!-- סטטוס עדכון -->
               </span>
             </div>
           </div>
 
-          <div class="profile-actions">
+          <div class="profile-actions"> <!-- כפתורי פעולה -->
             <a href="/profile/edit" class="btn-edit">✏️ עריכת פרופיל</a>
             <a href="/user/logout" class="btn-logout">🚪 יציאה</a>
             <form id="deleteForm" action="/user/delete" method="post">
@@ -59,10 +63,10 @@
           </div>
         </div>
 
-        <% if (genreMovies && genreMovies.length > 0) { %>
+        <% if (genreMovies && genreMovies.length > 0) { %> <!-- הצגת המלצות לפי ז'אנר -->
           <section class="recommended-section">
             <h3 class="recommended-title">🎬 סרטים מהז'אנר המועדף שלך</h3>
-            <div class="movies-grid">
+            <div class="movies-grid"> <!-- תצוגת פוסטרים -->
               <% genreMovies.forEach(movie => { %>
                 <div class="movie-card">
                   <div class="movie-image">
@@ -81,7 +85,7 @@
       </div>
     </main>
 
-    <%- include('partials/footer') %>
-    <script src="/script/profile.js"></script>
+    <%- include('partials/footer') %> <!-- כולל את הפוטר -->
+    <script src="/script/profile.js"></script> <!-- סקריפט לעדכון ז'אנר וכו' -->
   </body>
 </html>
